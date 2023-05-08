@@ -1,6 +1,7 @@
 import { ConfigService } from "@nestjs/config";
 import { Injectable } from '@nestjs/common';
 import { createClient, ClickHouseClient } from '@clickhouse/client'
+import type { ResponseJSON } from '@clickhouse/client'
 
 @Injectable()
 export class ClickhouseService {
@@ -43,7 +44,6 @@ export class ClickhouseService {
             query: `SELECT * FROM user`,
             format: 'JSONEachRow',
         })
-        console.log(rows.json());
-        return rows.json()
+        return await rows.json<ResponseJSON<{ id: number, number: string }>>()
     }
 }
