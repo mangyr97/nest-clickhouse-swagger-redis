@@ -7,9 +7,10 @@ export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Get()
-  getHello(): Promise<string> {
-    return this.appService.query();
+  async getHello(): Promise<string> {
+    return await this.appService.query();
   }
+
   @UsePipes(new ValidationPipe())
   @Post('create')
   create(@Body() dto: CreateDto) {
