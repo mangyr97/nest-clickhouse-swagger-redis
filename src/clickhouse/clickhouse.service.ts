@@ -46,4 +46,7 @@ export class ClickhouseService {
         })
         return await rows.json<ResponseJSON<{ id: number, number: string }>>()
     }
+    async onModuleDestroy() {
+        await this.client.close()
+    }
 }
